@@ -1,0 +1,604 @@
+package com.sample
+ 
+import javax.swing.JFrame;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+declare Pytanie
+	pytanie : String
+	opcje : String[]
+end
+
+declare Odpowiedz
+	pytanie : String
+	odpowiedz : String
+end
+
+rule "Init"
+    when
+    then
+    String[] opcje = new String[]{"Yes", "No","No, but she thought she was","What do you mean, during?"};
+    String odpowiedz = zadajPytanie(new Pytanie("Has a major character been pregnant during the show?", opcje));
+    insert(new Odpowiedz("Has a major character been pregnant during the show?", odpowiedz));    
+end
+
+rule "Has a major character been pregnant during the show? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Has a major character been pregnant during the show?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"No.These characters are so white, they're frightened of the Irish","Yes", "Barely"};
+    String odpowiedz = zadajPytanie(new Pytanie("Are there any black people?", opcje));
+    insert(new Odpowiedz("Are there any black people?", odpowiedz));    
+end
+
+rule "Are there any black people? - No.These characters are so white, they're frightened of the Irish"
+    when 
+    	Odpowiedz(getPytanie() == "Are there any black people?", getOdpowiedz() == "No.These characters are so white, they're frightened of the Irish")
+    then
+    zwrocWynik("DOWNTON ABBEY");  
+    System.exit(0);     
+end
+
+rule "Are there any black people? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Are there any black people?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"Only if you count dazed employees","Yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("How there been zombies?", opcje));
+    insert(new Odpowiedz("How there been zombies?", odpowiedz));    
+end
+
+rule "How there been zombies? - Only if you count dazed employees"
+    when 
+    	Odpowiedz(getPytanie() == "How there been zombies?", getOdpowiedz() == "Only if you count dazed employees")
+    then
+    zwrocWynik("the office");  
+    System.exit(0);     
+end
+
+rule "How there been zombies? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "How there been zombies?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"Uh, yes, hello, only ALL THE TIME", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Real zombies?", opcje));
+    insert(new Odpowiedz("Real zombies?", odpowiedz));    
+end
+
+rule "Real zombies? - Uh, yes, hello, only ALL THE TIME"
+    when 
+    	Odpowiedz(getPytanie() == "Real zombies?", getOdpowiedz() == "Uh, yes, hello, only ALL THE TIME")
+    then
+    zwrocWynik("WALKING DEAD");  
+    System.exit(0); 
+end
+
+rule "Real zombies? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Real zombies?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("community");  
+    System.exit(0); 
+end
+
+rule "How there been zombies? - No"
+    when 
+    	Odpowiedz(getPytanie() == "How there been zombies?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"Every so often", "Never","Literally all the time"};
+    String odpowiedz = zadajPytanie(new Pytanie("Roughly how often do people get shot?", opcje));
+    insert(new Odpowiedz("Roughly how often do people get shot?", odpowiedz));    
+end
+
+rule "Roughly how often do people get shot? - Every so often"
+    when 
+    	Odpowiedz(getPytanie() == "Roughly how often do people get shot?", getOdpowiedz() == "Every so often")
+    then
+    zwrocWynik("BOARDWALK EMPIRE");  
+    System.exit(0);   
+end
+
+rule "Roughly how often do people get shot? - Never"
+    when 
+    	Odpowiedz(getPytanie() == "Roughly how often do people get shot?", getOdpowiedz() == "Never")
+    then
+    String[] opcje = new String[]{"Big time", "No, thank God"};
+    String odpowiedz = zadajPytanie(new Pytanie("Do the characters sing a lot?", opcje));
+    insert(new Odpowiedz("Do the characters sing a lot?", odpowiedz));  
+       
+end
+
+rule "Do the characters sing a lot - Big time"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters sing a lot", getOdpowiedz() == "Big time")
+    then
+    String[] opcje = new String[]{"Originals. Horrible, horrible originals.", "Covers. Horrible, horrible Covers."};
+    String odpowiedz = zadajPytanie(new Pytanie("Covers or original songs?", opcje));
+    insert(new Odpowiedz("Covers or original songs?", odpowiedz));    
+end
+
+rule "Covers or original songs? - Originals. Horrible, horrible originals."
+    when 
+    	Odpowiedz(getPytanie() == "Covers or original songs?", getOdpowiedz() == "Originals. Horrible, horrible originals.")
+    then
+    zwrocWynik("SMASH");  
+    System.exit(0);    
+end
+
+rule "Covers or original songs? - Covers. Horrible, horrible Covers."
+    when 
+    	Odpowiedz(getPytanie() == "Covers or original songs?", getOdpowiedz() == "Covers. Horrible, horrible Covers.")
+    then
+    zwrocWynik("glee");  
+    System.exit(0);    
+end
+
+rule "Do the characters sing a lot? - No, thank God"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters sing a lot?", getOdpowiedz() == "No, thank God")
+    then
+    zwrocWynik("Parenthood");  
+    System.exit(0);    
+end
+
+rule "Roughly how often do people get shot? - Literally all the time"
+    when 
+    	Odpowiedz(getPytanie() == "Roughly how often do people get shot?", getOdpowiedz() == "Literally all the time")
+    then
+    zwrocWynik("JUSTIFIED");  
+    System.exit(0);    
+end
+
+rule "Are there any black people? - Barely"
+    when 
+    	Odpowiedz(getPytanie() == "Are there any black people?", getOdpowiedz() == "Barely")
+    then
+    String[] opcje = new String[]{"Yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Do the characters use cell phones?", opcje));
+    insert(new Odpowiedz("Do the characters use cell phones?", odpowiedz));    
+end
+
+rule "Do the characters use cell phones?? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters use cell phones?", getOdpowiedz() == "Yes")
+   then
+    String[] opcje = new String[]{"No", "Yes"};
+    String odpowiedz = zadajPytanie(new Pytanie("Do they play sports?", opcje));
+    insert(new Odpowiedz("Do they play sports?", odpowiedz));      
+end
+
+rule "Do they play sports? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Do they play sports?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"No, nothing", "Yes, almost everything", "Only Walt's eyes, with the absolute corruption of his innermost soul"};
+    String odpowiedz = zadajPytanie(new Pytanie("Is stuff haunted?", opcje));
+    insert(new Odpowiedz("Is stuff haunted?", odpowiedz));     
+end
+
+rule "Is stuff haunted? - No, nothing"
+    when 
+    	Odpowiedz(getPytanie() == "Is stuff haunted??", getOdpowiedz() == "No, nothing")
+    then
+    String[] opcje = new String[]{"Yeah...? That's a weird question", "No, and frankly it started getting ridiculous four seasons ago. Come on, writers, just tell us."};
+    String odpowiedz = zadajPytanie(new Pytanie("Do we know who everyone's mother is?", opcje));
+    insert(new Odpowiedz("Do we know who everyone's mother is?", odpowiedz));  
+     
+end
+
+rule "Do we know who everyone's mother is? - Yeah...? That's a weird question"
+    when 
+    	Odpowiedz(getPytanie() == "Do we know who everyone's mother is?", getOdpowiedz() == "Yeah...? That's a weird question")
+    then
+    zwrocWynik("modern family");  
+    System.exit(0); 
+end
+
+rule "Do we know who everyone's mother is? - No, and frankly it started getting ridiculous four seasons ago. Come on, writers, just tell us."
+    when 
+    	Odpowiedz(getPytanie() == "Do we know who everyone's mother is?", getOdpowiedz() == "No, and frankly it started getting ridiculous four seasons ago. Come on, writers, just tell us.")
+    then
+    zwrocWynik("how i met your mother");  
+    System.exit(0); 
+end
+
+
+rule "Is stuff haunted? - Yes, almost everything"
+    when 
+    	Odpowiedz(getPytanie() == "Is stuff haunted?", getOdpowiedz() == "Yes, almost everything")
+    then
+    zwrocWynik("AMERICAN HORROR STORY");  
+    System.exit(0);  
+end
+
+rule "Is stuff haunted? - Only Walt's eyes, with the absolute corruption of his innermost soul"
+    when 
+    	Odpowiedz(getPytanie() == "Is stuff haunted?", getOdpowiedz() == "Only Walt's eyes, with the absolute corruption of his innermost soul")
+    then
+    zwrocWynik("Breaking Bad");  
+    System.exit(0);  
+end
+
+rule "Do they play sports? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Do they play sports?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"Fantasy","Real. I play real sports, not try to be the best at exercising."};
+    String odpowiedz = zadajPytanie(new Pytanie("In the words of Queen, are these sports real life or are they just fantasy?", opcje));
+    insert(new Odpowiedz("In the words of Queen, are these sports real life or are they just fantasy?", odpowiedz));    
+end
+
+rule "In the words of Queen, are these sports real life or are they just fantasy? - Fantasy"
+    when 
+    	Odpowiedz(getPytanie() == "In the words of Queen, are these sports real life or are they just fantasy?", getOdpowiedz() == "Fantasy")
+    then
+    zwrocWynik("THE LEAGUE");  
+    System.exit(0);     
+end
+
+rule "In the words of Queen, are these sports real life or are they just fantasy? - Real. I play real sports, not try to be the best at exercising."
+    when 
+    	Odpowiedz(getPytanie() == "In the words of Queen, are these sports real life or are they just fantasy?", getOdpowiedz() == "Real. I play real sports, not try to be the best at exercising.")
+    then
+    zwrocWynik("Eastbound DOWN");  
+    System.exit(0);     
+end
+
+rule "Do the characters use cell phones? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters use cell phones?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"Yes. Cars. Cars as luxurious as the woman you can never have.", "Who needs a car when you can ride DEAD HORSES?"};
+    String odpowiedz = zadajPytanie(new Pytanie("But they at least have cars, right?", opcje));
+    insert(new Odpowiedz("But they at least have cars, right?", odpowiedz));    
+end
+
+
+rule "But they at least have cars, right? - Yes. Cars. Cars as luxurious as the woman you can never have."
+    when 
+    	Odpowiedz(getPytanie() == "But they at least have cars, right?", getOdpowiedz() == "Yes. Cars. Cars as luxurious as the woman you can never have.")
+    then
+    zwrocWynik("MADMEN");  
+    System.exit(0);   
+end
+
+rule "But they at least have cars, right? - Who needs a car when you can ride DEAD HORSES?"
+    when 
+    	Odpowiedz(getPytanie() == "But they at least have cars, right?", getOdpowiedz() == "Who needs a car when you can ride DEAD HORSES?")
+    then
+    zwrocWynik("GAME OF THRONES?");  
+    System.exit(0);   
+end
+
+
+rule "Has a major character been pregnant during the show? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Has a major character been pregnant during the show?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"Yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Are there still kids on the show, though?", opcje));
+    insert(new Odpowiedz("Are there still kids on the show, though?", odpowiedz));    
+end
+
+rule "Are there still kids on the show, though? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Are there still kids on the show, though?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"Yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Is the show set in the Northeast?", opcje));
+    insert(new Odpowiedz("Is the show set in the Northeast?", odpowiedz));  
+end
+
+rule "Is the show set in the Northeast? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Is the show set in the Northeast?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"Yes","Only if you count an ex-wife, amirite???", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Is there an evil queen?", opcje));
+    insert(new Odpowiedz("Is there an evil queen?", odpowiedz));    
+end
+
+rule "Is there an evil queen? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Is there an evil queen?", getOdpowiedz() == "Yes")
+    then
+    zwrocWynik("ONCE UPON A TIME");  
+    System.exit(0);  
+end
+
+rule "Is there an evil queen? - Only if you count an ex-wife, amirite???"
+    when 
+    	Odpowiedz(getPytanie() == "Is there an evil queen?", getOdpowiedz() == "Only if you count an ex-wife, amirite???")
+    then
+    zwrocWynik("LOUIE");  
+    System.exit(0);  
+end
+
+rule "Is there an evil queen? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Is there an evil queen?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("BOB'S BURGERS");  
+    System.exit(0);  
+end
+
+rule "Is the show set in the Northeast? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Is the show set in the Northeast?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"Unfortunately, yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Could diaper changing be a legitimate plotline?", opcje));
+    insert(new Odpowiedz("Could diaper changing be a legitimate plotline?", odpowiedz));    
+end
+
+rule "Could diaper changing be a legitimate plotline? - Unfortunately, yes"
+    when 
+    	Odpowiedz(getPytanie() == "Could diaper changing be a legitimate plotline?", getOdpowiedz() == "Unfortunately, yes")
+    then
+    String[] opcje = new String[]{"Rich enough to be best friends with basically Oprah", "Poor enough to be best friends with a roller skating homeless dude"};
+    String odpowiedz = zadajPytanie(new Pytanie("Are the characters rich or poor?", opcje));
+    insert(new Odpowiedz("Are the characters rich or poor?", odpowiedz));    
+end
+
+rule "Are the characters rich or poor? - Rich enough to be best friends with basically Oprah"
+    when 
+    	Odpowiedz(getPytanie() == "Are the characters rich or poor?", getOdpowiedz() == "Rich enough to be best friends with basically Oprah")
+    then
+    zwrocWynik("Up ALL Night");  
+    System.exit(0);  
+end
+
+rule "Are the characters rich or poor? - Poor enough to be best friends with a roller skating homeless dude"
+    when 
+    	Odpowiedz(getPytanie() == "Are the characters rich or poor?", getOdpowiedz() == "Poor enough to be best friends with a roller skating homeless dude")
+    then
+    zwrocWynik("RAISING HOPE");  
+    System.exit(0);  
+end
+
+rule "Could diaper changing be a legitimate plotline? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Could diaper changing be a legitimate plotline?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("NASHVILLE");  
+    System.exit(0);  
+end
+
+rule "Are there still kids on the show, though? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Are there still kids on the show, though?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"Yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Do the characters work for some kind of government agency?", opcje));
+    insert(new Odpowiedz("Do the characters work for some kind of government agency?", odpowiedz));    
+end
+
+rule "Do the characters work for some kind of government agency? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters work for some kind of government agency?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"No", "I'm not at liberty to disclose that. Unless we're sleeping together.","Danger zone!"};
+    String odpowiedz = zadajPytanie(new Pytanie("Like a government SPY agency?", opcje));
+    insert(new Odpowiedz("Like a government SPY agency?", odpowiedz));    
+end
+
+rule "Like a government SPY agency? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Like a government SPY agency?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("Parks and Recreation");  
+    System.exit(0);  
+end
+
+rule "Like a government SPY agency? - I'm not at liberty to disclose that. Unless we're sleeping together."
+    when 
+    	Odpowiedz(getPytanie() == "Like a government SPY agency?", getOdpowiedz() == "I'm not at liberty to disclose that. Unless we're sleeping together.")
+    then
+    zwrocWynik("HOMELAND");  
+    System.exit(0);  
+end
+
+rule "Like a government SPY agency? - Danger zone!"
+    when 
+    	Odpowiedz(getPytanie() == "Like a government SPY agency?", getOdpowiedz() == "Danger zone!")
+    then
+    zwrocWynik("archer");  
+    System.exit(0);  
+end
+
+
+rule "Do the characters work for some kind of government agency? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters work for some kind of government agency?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"WHO HAS A LOFT LIKE THAT ON A BARISTA'S SALARY?", "Nope"};
+    String odpowiedz = zadajPytanie(new Pytanie("Do the characters own apartments they definitely can't afford?", opcje));
+    insert(new Odpowiedz("Do the characters own apartments they definitely can't afford?", odpowiedz));    
+end
+
+rule "Do the characters own apartments they definitely can't afford? - WHO HAS A LOFT LIKE THAT ON A BARISTA'S SALARY?"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters own apartments they definitely can't afford?", getOdpowiedz() == "WHO HAS A LOFT LIKE THAT ON A BARISTA'S SALARY?")
+    then
+    String[] opcje = new String[]{"You know it", "Not unless you count James Van Der Beek","No but that would be ah-MAH-zing"};
+    String odpowiedz = zadajPytanie(new Pytanie("3 words: Are there cupcakes?", opcje));
+    insert(new Odpowiedz("3 words: Are there cupcakes?", odpowiedz));    
+end
+
+rule "3 words: Are there cupcakes? - You know it"
+    when 
+    	Odpowiedz(getPytanie() == "3 words: Are there cupcakes?", getOdpowiedz() == "You know it")
+    then
+    zwrocWynik("2 BROKE GIRLS");  
+    System.exit(0);    
+end
+
+rule "3 words: Are there cupcakes? - Not unless you count James Van Der Beek"
+    when 
+    	Odpowiedz(getPytanie() == "3 words: Are there cupcakes?", getOdpowiedz() == "Not unless you count James Van Der Beek")
+    then
+    zwrocWynik("APT 23");  
+    System.exit(0);    
+end
+
+rule "3 words: Are there cupcakes? - No but that would be ah-MAH-zing"
+    when 
+    	Odpowiedz(getPytanie() == "3 words: Are there cupcakes?", getOdpowiedz() == "No but that would be ah-MAH-zing")
+    then
+    zwrocWynik("HAPPY ENDINGS");  
+    System.exit(0);    
+end
+
+rule "Do the characters own apartments they definitely can't afford? - Nope"
+    when 
+    	Odpowiedz(getPytanie() == "Do the characters own apartments they definitely can't afford?", getOdpowiedz() == "Nope")
+    then
+    String[] opcje = new String[]{"Nailed it", "No, were not, dummy"};
+    String odpowiedz = zadajPytanie(new Pytanie("Okey, so we must be talkig sketch comedy.", opcje));
+    insert(new Odpowiedz("Okey, so we must be talkig sketch comedy.", odpowiedz));    
+end
+
+rule "Okey, so we must be talkig sketch comedy. - Nailed it"
+    when 
+    	Odpowiedz(getPytanie() == "Okey, so we must be talkig sketch comedy.", getOdpowiedz() == "Nailed it")
+    then
+    String[] opcje = new String[]{"Yes, but I liked it before it was on Netflix", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Sketch comedy about hipsters?", opcje));
+    insert(new Odpowiedz("Sketch comedy about hipsters?", odpowiedz));    
+end
+
+rule "Sketch comedy about hipsters? - Yes, but I liked it before it was on Netflix"
+    when 
+    	Odpowiedz(getPytanie() == "Sketch comedy about hipsters?", getOdpowiedz() == "Yes, but I liked it before it was on Netflix")
+    then
+    zwrocWynik("PORTLANDIA");  
+    System.exit(0);  
+end
+
+rule "Sketch comedy about hipsters? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Sketch comedy about hipsters?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("Key&PEELE");  
+    System.exit(0);  
+end
+
+rule "Okey, so we must be talkig sketch comedy. - No, were not, dummy"
+    when 
+    	Odpowiedz(getPytanie() == "Okey, so we must be talkig sketch comedy.", getOdpowiedz() == "No, were not, dummy")
+    then
+    String[] opcje = new String[]{"Yeah, they shmeoooke a bewrl", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Huh. Uh... is there weed?", opcje));
+    insert(new Odpowiedz("Huh. Uh... is there weed?", odpowiedz));    
+end
+
+rule "Huh. Uh... is there weed? - Yeah, they shmeoooke a bewrl"
+    when 
+    	Odpowiedz(getPytanie() == "Huh. Uh... is there weed?", getOdpowiedz() == "Yeah, they shmeoooke a bewrl")
+    then
+    zwrocWynik("WORKAHOLICS");  
+    System.exit(0);   
+end
+
+rule "Huh. Uh... is there weed? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Huh. Uh... is there weed?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("Oh my gosh, you must be the one person on the planet watching GRIMM. It is an honor to meet you");  
+    System.exit(0);   
+end
+///////////////////
+
+rule "Has a major character been pregnant during the show? - No, but she thought she was"
+    when 
+    	Odpowiedz(getPytanie() == "Has a major character been pregnant during the show?", getOdpowiedz() == "No, but she thought she was")
+    then
+    String[] opcje = new String[]{"No", "So happy she lizzed her pants."};
+    String odpowiedz = zadajPytanie(new Pytanie("Was she happy about it?", opcje));
+    insert(new Odpowiedz("Was she happy about it?", odpowiedz));    
+end
+
+rule "Was she happy about it? - No"
+    when 
+    	Odpowiedz(getPytanie() == "Was she happy about it?", getOdpowiedz() == "No")
+    then
+    String[] opcje = new String[]{"Yes", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("Because she's only a girl right?", opcje));
+    insert(new Odpowiedz("Because she's only a girl right?", odpowiedz));    
+end
+
+rule "Because she's only a girl right? - Yes"
+    when 
+    	Odpowiedz(getPytanie() == "Because she's only a girl right?", getOdpowiedz() == "Yes")
+    then
+    String[] opcje = new String[]{"Are you happy now commercials? We're using your dumb made-up word.", "No"};
+    String odpowiedz = zadajPytanie(new Pytanie("A girl who's adorkable?", opcje));
+    insert(new Odpowiedz("A girl who's adorkable?", odpowiedz));    
+end
+
+rule "A girl who's adorkable? - Are you happy now commercials? We're using your dumb made-up word."
+    when 
+    	Odpowiedz(getPytanie() == "A girl who's adorkable?", getOdpowiedz() == "Are you happy now commercials? We're using your dumb made-up word.")
+    then
+    zwrocWynik("New Girl");  
+    System.exit(0);   
+end
+
+rule "A girl who's adorkable? - No"
+    when 
+    	Odpowiedz(getPytanie() == "A girl who's adorkable?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("GIRLS");  
+    System.exit(0);   
+end
+
+rule "Because she's only a girl right? - NO"
+    when 
+    	Odpowiedz(getPytanie() == "Because she's only a girl right?", getOdpowiedz() == "No")
+    then
+    zwrocWynik("VEEP");  
+    System.exit(0);   
+end
+
+rule "Was she happy about it? - So happy she lizzed her pants."
+    when 
+    	Odpowiedz(getPytanie() == "Was she happy about it?", getOdpowiedz() == "So happy she lizzed her pants.")
+    then
+    zwrocWynik("3OROCK");  
+    System.exit(0);   
+end
+
+rule "Has a major character been pregnant during the show? - What do you mean, 'during'?"
+    when 
+    	Odpowiedz(getPytanie() == "Has a major character been pregnant during the show?", getOdpowiedz() == "What do you mean, 'during'?")
+    then
+    zwrocWynik("DOCTOR WHO");  
+    System.exit(0);   
+end
+
+function  String zadajPytanie(Pytanie pytanie) {
+        	int okno = JOptionPane.showOptionDialog(null,
+        			pytanie.getPytanie(),
+        			"Question",
+        			JOptionPane.YES_NO_OPTION,
+        			JOptionPane.QUESTION_MESSAGE,
+        			null, 
+        			pytanie.getOpcje(), 
+        			pytanie.getOpcje()[0]); 
+        			
+        			if(okno==-1) {
+        				System.exit(-1);
+        				return "Error";
+        				
+        			}
+        			else 
+        				return pytanie.getOpcje()[okno];
+        	    }
+        	    
+function void zwrocWynik(String wynik) {
+        		JOptionPane.showMessageDialog(null,
+        			wynik,
+        			"Result",
+        			
+        			JOptionPane.INFORMATION_MESSAGE);
+        	    }
